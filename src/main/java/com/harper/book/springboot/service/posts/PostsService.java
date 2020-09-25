@@ -2,6 +2,7 @@ package com.harper.book.springboot.service.posts;
 
 import com.harper.book.springboot.domain.posts.Posts;
 import com.harper.book.springboot.domain.posts.PostsRepository;
+import com.harper.book.springboot.web.dto.PostsListResponseDto;
 import com.harper.book.springboot.web.dto.PostsResponseDto;
 import com.harper.book.springboot.web.dto.PostsSaveRequestDto;
 import com.harper.book.springboot.web.dto.PostsUpdateRequestDto;
@@ -9,12 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 // 스프링에서 bean을 주입받는 방식은 다음과 같다. @Autowired, @Setter, 생성자.
 // 이 중 가장 권장받는 방법은 생성자로 주입받는방식이다.
 // @RequiredArgsConstructor가 대신 생성해 준 것. ( 롬복 어노테이션)
 @RequiredArgsConstructor
 @Service
-public class PostsServcie{
+public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
@@ -39,5 +43,12 @@ public class PostsServcie{
                             .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                    .map(PostsListResponseDto::new)
+                    .collect(Collectors.toList());
     }
 }

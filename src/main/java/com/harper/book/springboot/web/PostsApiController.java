@@ -1,6 +1,6 @@
 package com.harper.book.springboot.web;
 
-import com.harper.book.springboot.service.posts.PostsServcie;
+import com.harper.book.springboot.service.posts.PostsService;
 import com.harper.book.springboot.web.dto.PostsResponseDto;
 import com.harper.book.springboot.web.dto.PostsSaveRequestDto;
 import com.harper.book.springboot.web.dto.PostsUpdateRequestDto;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostsApiController {
 
-    private final PostsServcie postsService;
+    private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
