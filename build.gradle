@@ -1,13 +1,12 @@
-buildscript {
-    ext{
-        springBootVersion = '2.1.7.RELEASE'
-    }
 
-    repositories{
+buildscript {
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
         mavenCentral()
         jcenter()
     }
-
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
@@ -18,35 +17,87 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-//
-//
-//plugins {
-//    id 'java'
-//}
-
 group 'org.harper.book'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.projectlombok:lombok')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('com.h2database:h2')
+
+    compile('org.projectlombok:lombok')  // lombok 추가
+
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') // 스프링 부트용 spring data jpa 추상화 lib 추가
+
+    compile('com.h2database:h2') // h2 : 인메모리 RDB , 메모리에서 실행되기 때문에 애플리케이션 재시작마다 초기화(테스트 용도로 많이 사용)
+
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')   // 소셜 로그인 등 클라이언트 입장에서 필요  oauth2-client,jose 둘 다 관리
+
+    compile('org.springframework.session:spring-session-jdbc')
+
+    compile("org.mariadb.jdbc:mariadb-java-client")
+
+   // testCompile('org.springframework.security:spring-security-test')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    annotationProcessor 'org.projectlombok:lombok'
-    implementation 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.projectlombok:lombok'
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+//buildscript {
+//    ext{
+//        springBootVersion = '2.1.7.RELEASE'
+//    }
+//
+//    repositories{
+//        mavenCentral()
+//        jcenter()
+//    }
+//
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//    }
+//}
+//
+//apply plugin: 'java'
+//apply plugin: 'eclipse'
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
+//
+//
+////
+////
+////plugins {
+////    id 'java'
+////}
+//
+//group 'org.harper.book'
+//version '1.0-SNAPSHOT'
+//sourceCompatibility = 1.8
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    compile('org.springframework.boot:spring-boot-starter-web')
+//    compile('org.projectlombok:lombok')
+//    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//    compile('com.h2database:h2')
+//    testCompile('org.spring 4framework.boot:spring-boot-starter-test')
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//    annotationProcessor 'org.projectlombok:lombok'
+//    implementation 'org.projectlombok:lombok'
+//    testAnnotationProcessor 'org.projectlombok:lombok'
+//    testImplementation 'org.projectlombok:lombok'
+//}
+//
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
