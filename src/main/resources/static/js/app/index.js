@@ -1,4 +1,3 @@
-
 var main = {
     init : function () {
         var _this = this;
@@ -10,9 +9,13 @@ var main = {
             _this.update();
         });
 
-        $('#btn-delete').on('click', function () {
+        $('#btn-delete').on('click', function() {
             _this.delete();
         });
+
+        $('#btn-google').on('click', function() {
+            _this.google() ;
+        }) ;
     },
     save : function () {
         var data = {
@@ -69,6 +72,10 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    google : function() {
+        var id = $('#userName').val() ;
+        alert('id: '+id);
     }
 
 };
